@@ -2,7 +2,8 @@ from pathlib import Path
 from decouple import config
 import dj_database_url
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
@@ -56,7 +57,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'fortynx_backend.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': dj_database_url.config(default=os.environ.get("DATABASE_URL"))
 }
 
 # DATABASES = {
@@ -71,7 +72,7 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = []
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 USE_TZ = True
 STATIC_URL = 'static/'

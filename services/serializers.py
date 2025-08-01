@@ -1,13 +1,22 @@
 from rest_framework import serializers
-from .models import Service
+from .models import ServiceCategory, Service, ServiceFeature
+
+class ServiceFeatureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ServiceFeature
+        fields = ['text']
 
 class ServiceSerializer(serializers.ModelSerializer):
+    features = ServiceFeatureSerializer(many=True, read_only=True)
+    category = serializers.StringRelatedField()
+
     class Meta:
         model = Service
-        fields = '__all__'
+        fields = ['id', 'title', 'slug', 'description', 'icon', 'image', 'category', 'features']
 
-    def get_image(self, obj):
-        request = self.context.get('request')
-        if obj.image and request:
-            return request.build_absolute_uri(obj.image.url)
-        return None
+class ServiceCategorySerializer(serializers.ModelSerializer):
+    services = ServiceSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = ServiceCategory
+        fields = ['id', 'name', 'services']
