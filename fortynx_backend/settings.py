@@ -20,7 +20,7 @@ WWW_DOMAIN = f"www.{FRONTEND_DOMAIN}"
 ALLOWED_HOSTS = [
     FRONTEND_DOMAIN,
     WWW_DOMAIN,
-    "api.fortynx.in",  # if this backend is directly accessed via this subdomain
+    "api.fortynx.in",
 ]
 
 # Application definition
@@ -99,6 +99,9 @@ CORS_ALLOWED_ORIGINS = [
     f"https://{FRONTEND_DOMAIN}",
     f"https://{WWW_DOMAIN}",
 ]
+
+# Trust proxy header so HTTPS detection works behind Railway's TLS termination
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # HTTPS / security hardening (only when not in debug)
 if not DEBUG:
