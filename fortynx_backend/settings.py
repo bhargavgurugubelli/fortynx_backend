@@ -21,6 +21,8 @@ ALLOWED_HOSTS = [
     FRONTEND_DOMAIN,
     WWW_DOMAIN,
     "api.fortynx.in",
+    "localhost",
+    "127.0.0.1",
 ]
 
 # Application definition
@@ -98,6 +100,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     f"https://{FRONTEND_DOMAIN}",
     f"https://{WWW_DOMAIN}",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 
 # Trust proxy header so HTTPS detection works behind Railway's TLS termination
